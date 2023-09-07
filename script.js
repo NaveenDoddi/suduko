@@ -1,55 +1,31 @@
 console.log("jai sree krishnaa")
 
 
-// function main(){
+function main1(){
+    var rowArray = [1,2,3,4,5,6,7,8,9]
 
-//     var col = [[
-//         3, 7, 5, 9, 2,
-//         1, 4, 6, 8
-//     ]]
-//     var count = 1
-//     function run(){
+    var arr = [[]]
+
+    for(let i = 0; i < 9; i++){
+        var element = rowArray[Math.floor(Math.random() * rowArray.length)]
+
+        for(let j = 0 ; j < rowArray.length; j++){
+            if(rowArray[j] == element){
+                rowArray.splice(j, 1)
+            }
+        }
+        arr[0].push(element)
         
-//         col[count] = []
-        
-//         var arr = [1,2,3,4,5,6,7,8,9]
-        
-//         for(let i = 0; i < 9; i++){
-//             var arr1 = [1,2,3,4,5,6,7,8,9]
-            
-//             for(let j = 0 ; j < count; j++){
-                
-//                 arr1.splice(arr1.findIndex((i) => i == col[count-1][j]),1)
-                
-//             }
-            
-//             // console.log(arr1.findIndex((i) => i == col[count-1][j]))
-//             console.log(arr1)
-
-//             // var element = Math.floor(Math.random() *  arr1.length)
-//             // col[count].push(arr[element])
-//             // arr.splice(arr.findIndex((i) => i == arr[element]),1);
-//             // console.log(col[count])
-            
-//         }
-        
-//         count++
-//     }
-
-//     for(let m = 0; m < 2; m++){
-//         run()
-
-//         console.log("col")
-//     }
-//     // console.log(col)
-// }
-// main()
-
-var resultArray = [[3, 7, 5, 9, 2, 1, 4, 6, 8]]
+    }
+    return arr
+    
+}
 
 function main(){
 
-    for(let k = 0 ; k < 8; k++){
+    var resultArray = main1()
+
+    for(let k = 0 ; k < 100; k++){
 
         var rowArray = [1,2,3,4,5,6,7,8,9]
 
@@ -69,62 +45,83 @@ function main(){
             }
     
             var developedArray = [...colArray, ...rowArray]
-            // console.log(developedArray, "deveolped")
+            
             var result1Array = removeOneTimeRepeated(developedArray)
     
             var element = result1Array[Math.floor(Math.random() *  result1Array.length)]
-            result2Array.push(element)
-
-            // resultArray[k+1][i+1].push(element)
+            result2Array.push(element)            
             
             for(let j = 0 ; j < rowArray.length; j++){
                 if(rowArray[j] == element){
                     rowArray.splice(j, 1)
                 }
             }
-            // console.log(element)
-            // console.log(rowArray)
+            
+            if(element == undefined){
+                break
+            }
             
         }
         
-        // console.log(element)
-        // console.log(rowArray)
-        resultArray.push(result2Array)
-        
+        if(element == undefined){
+
+        }else{
+            resultArray.push(result2Array)
+        }
+        if(resultArray.length == 9){
+            
+            return resultArray
+        }
+
     }
-    console.log(resultArray)
+
 }
 
-main()
 
 function removeOneTimeRepeated(arr) {
-    const elementCount = {};
+    const elementCount = [];
+  
+    arr.forEach(i => {
+        if (elementCount[i]) {
+            elementCount[i]++;
+        } else {
+            elementCount[i] = 1;
+        }
+    })
 
-    // Count the occurrences of each element in the array
-    for (const element of arr) {
-      if (elementCount[element]) {
-        elementCount[element]++;
-      } else {
-        elementCount[element] = 1;
-      }
-    }
-  
-    let hasRepeatedTwice = false;
-  
-    // Check if any element repeats twice
-    for (const element in elementCount) {
-      if (elementCount[element] === 2) {
-        hasRepeatedTwice = true;
-        break;
-      }
-    }
-  
-    if (hasRepeatedTwice) {
-      // Filter out elements that occur only once
-      const result = arr.filter(element => elementCount[element] !== 1);
-      return result;
-    } else {
-      // No element repeats twice, return the original array
-      return arr;
-    }
+    const result = arr.filter(i => elementCount[i] !== 1);
+
+    return result;
 }
+
+var result = main()
+var table = document.createElement("table")
+table.className = "table"
+for(let i =0; i < result.length; i++){
+
+    var tr = document.createElement("tr")
+
+    for(let j = 0; j < result[i].length; j++){
+
+        var td = document.createElement("td")
+        if(j == 2){
+            td.style.visibility = "hidden"
+        }
+        td.innerText = result[i][j]
+        tr.append(td)
+    }
+    table.append(tr)
+}
+document.body.append(table)
+
+
+// var arr = [1,24,5,6]
+// const elementCount = [];
+// arr.forEach(i => {
+//     if (elementCount[i]) {
+//         elementCount[i]++;
+//     } else {
+//         elementCount[i] = 1;
+//     }
+// });
+// console.log(elementCount)
