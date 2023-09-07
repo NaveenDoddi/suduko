@@ -115,6 +115,7 @@ for(let i =0; i < result.length; i++){
 document.body.append(table)
 
 
+
 // var arr = [1,24,5,6]
 // const elementCount = [];
 // arr.forEach(i => {
