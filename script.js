@@ -25,8 +25,9 @@ function main(){
 
     var resultArray = main1()
 
-    for(let k = 0 ; k < 100; k++){
-
+    // for(let k = 0 ; k < 100; k++){
+    while(resultArray.length < 9){
+        console.log(resultArray.length)
         var rowArray = [1,2,3,4,5,6,7,8,9]
 
         var result2Array = []
@@ -63,18 +64,11 @@ function main(){
             
         }
         
-        if(element == undefined){
-
-        }else{
+        if(element != undefined){
             resultArray.push(result2Array)
         }
-        if(resultArray.length == 9){
-            
-            return resultArray
-        }
-
     }
-
+    return resultArray
 }
 
 
@@ -89,31 +83,68 @@ function removeOneTimeRepeated(arr) {
         }
     })
 
-    const result = arr.filter(i => elementCount[i] !== 1);
+    const result = arr.filter(i => elementCount[i] != 1);
 
     return result;
 }
 
-var result = main()
-var table = document.createElement("table")
-table.className = "table"
-for(let i =0; i < result.length; i++){
 
-    var tr = document.createElement("tr")
+function produceHiddenElements(){
 
-    for(let j = 0; j < result[i].length; j++){
+    var arr = []
 
-        var td = document.createElement("td")
-        if(j == 2){
-            td.style.visibility = "hidden"
+    while(arr.length < 6){
+
+        var element = Math.floor(Math.random() * 9)
+        var bool = true
+        arr.forEach((i)=> i == element ? bool = false : 0)
+
+        if(bool){
+            arr.push(element)
         }
-        td.innerText = result[i][j]
-        tr.append(td)
     }
-    table.append(tr)
-}
-document.body.append(table)
+    // console.log(hiddenElementsArray)
 
+    return arr
+}
+
+
+function display(){
+
+    const result = main()
+
+
+    var table = document.createElement("table")
+    table.className = "table"
+
+    for(let i = 0; i < result.length; i++){
+
+        const hiddenElementsArray = produceHiddenElements()
+
+        var tr = document.createElement("tr")
+    
+        for(let j = 0; j < result[i].length; j++){
+    
+            var td = document.createElement("td")
+            hiddenElementsArray.map((k) => k == j ? td.style.visibility = "hidden" + td.addEventListener("click", visibleElements) : 0)
+
+            td.innerText = result[i][j]
+            tr.append(td)
+
+        }
+        table.append(tr)
+    }
+
+
+    document.body.append(table)
+}
+
+
+function visibleElements(click){
+    click.style.visibility = "visible"
+}
+
+display()
 
 
 // var arr = [1,24,5,6]
