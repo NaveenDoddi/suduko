@@ -113,7 +113,6 @@ function display(){
 
     const result = main()
 
-
     var table = document.createElement("table")
     table.className = "table"
 
@@ -126,7 +125,7 @@ function display(){
         for(let j = 0; j < result[i].length; j++){
     
             var td = document.createElement("td")
-            hiddenElementsArray.map((k) => k == j ? td.style.visibility = "hidden" + td.addEventListener("click", visibleElements) : 0)
+            hiddenElementsArray.map((k) => k == j ? td.style.visibility = "hidden" : 0)
 
             td.innerText = result[i][j]
             tr.append(td)
@@ -135,17 +134,26 @@ function display(){
         table.append(tr)
     }
 
-
     document.body.append(table)
 }
 
 
-function visibleElements(click){
-    click.style.visibility = "visible"
+function visibleElements(){
+    var elements = document.getElementsByTagName("td")
+    for(let i = 0; i < elements.length; i++){
+        if (elements[i].style.visibility == "hidden"){
+            elements[i].addEventListener("click", func)
+            console.log(elements[i])
+        }
+    }
+}
+
+function func(){
+    console.log("f")
 }
 
 display()
-
+visibleElements()
 
 // var arr = [1,24,5,6]
 // const elementCount = [];
