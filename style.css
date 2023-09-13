@@ -1,0 +1,18 @@
+.div3{
+    display: inline-flex;
+    border:   2px solid black;
+    
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+#inputNumbers{
+    height: 30px;
+    width: 41px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

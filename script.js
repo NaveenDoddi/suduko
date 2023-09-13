@@ -27,7 +27,6 @@ function main(){
 
     // for(let k = 0 ; k < 100; k++){
     while(resultArray.length < 9){
-        console.log(resultArray.length)
         var rowArray = [1,2,3,4,5,6,7,8,9]
 
         var result2Array = []
@@ -103,9 +102,32 @@ function produceHiddenElements(){
             arr.push(element)
         }
     }
-    // console.log(hiddenElementsArray)
 
     return arr
+}
+
+var bool = false
+
+function visibleElements(click){
+
+    click.id = "current"
+    click.style.backgroundColor = "lightblue"
+
+    // var span = click.getElementsByTagName("span")[0]
+    // span.style.visibility = "visible"
+
+    if(bool){
+        document.getElementById("previous").style.backgroundColor = "white"
+        document.getElementById("previous").id = ""
+        
+    }
+    document.getElementById("current").id = "previous"
+    bool = true
+
+}
+
+function handleClick(){
+    visibleElements(this)
 }
 
 
@@ -113,47 +135,43 @@ function display(){
 
     const result = main()
 
-    var table = document.createElement("table")
-    table.className = "table"
+    var div1 = document.createElement("div")
+    div1.className = "div1"
 
     for(let i = 0; i < result.length; i++){
 
         const hiddenElementsArray = produceHiddenElements()
 
-        var tr = document.createElement("tr")
+        var div2 = document.createElement("div")
+        div2.className = "div2"
     
         for(let j = 0; j < result[i].length; j++){
     
-            var td = document.createElement("td")
-            hiddenElementsArray.map((k) => k == j ? td.style.visibility = "hidden" : 0)
+            var div3 = document.createElement("div")
+            var span = document.createElement("span")
+            div3.className = "div3"
+            hiddenElementsArray.map((k) => k == j ? div3.addEventListener("click",handleClick) + (span.style.visibility = "hidden"): 0)
 
-            td.innerText = result[i][j]
-            tr.append(td)
+            span.innerText = result[i][j]
+            div3.append(span)
+            div2.append(div3)
 
         }
-        table.append(tr)
+        div1.append(div2)
     }
 
-    document.body.append(table)
-}
-
-
-function visibleElements(){
-    var elements = document.getElementsByTagName("td")
-    for(let i = 0; i < elements.length; i++){
-        if (elements[i].style.visibility == "hidden"){
-            elements[i].addEventListener("click", func)
-            console.log(elements[i])
-        }
-    }
-}
-
-function func(){
-    console.log("f")
+    document.getElementById("toShowTable").append(div1)
 }
 
 display()
-visibleElements()
+
+function toFillBox(click){
+    var input = click.innerText
+    document.getElementById("previous").innerText = input
+    
+    // arr.map((i)=> i.style.backgroundColor == "lightblue" ? i.innerText = input : 0)
+}
+
 
 // var arr = [1,24,5,6]
 // const elementCount = [];
