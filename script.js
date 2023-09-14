@@ -25,7 +25,6 @@ function main(){
 
     var resultArray = main1()
 
-    // for(let k = 0 ; k < 100; k++){
     while(resultArray.length < 9){
         var rowArray = [1,2,3,4,5,6,7,8,9]
 
@@ -92,7 +91,7 @@ function produceHiddenElements(){
 
     var arr = []
 
-    while(arr.length < 6){
+    while(arr.length < 4){
 
         var element = Math.floor(Math.random() * 9)
         var bool = true
@@ -167,9 +166,26 @@ display()
 
 function toFillBox(click){
     var input = click.innerText
-    document.getElementById("previous").innerText = input
-    
-    // arr.map((i)=> i.style.backgroundColor == "lightblue" ? i.innerText = input : 0)
+    var arr = document.getElementsByTagName("div")
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i].style.backgroundColor == "lightblue" || arr[i].style.backgroundColor == "red"){
+            console.log(arr[i].getElementsByTagName("span")[0].innerHTML.toString() == input)
+            console.log(arr[i].getElementsByTagName("span")[0].innerHTML.toString())
+            console.log(input)
+            if(arr[i].getElementsByTagName("span")[0].innerHTML.toString() == input){
+
+                arr[i].style.backgroundColor = "green"
+                arr[i].getElementsByTagName("span")[0].innerText = input
+                arr[i].getElementsByTagName("span")[0].style.visibility = "visible"
+
+            }else{
+
+                arr[i].style.backgroundColor = "red"
+                
+            }
+        }
+    }
+
 }
 
 
