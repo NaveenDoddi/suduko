@@ -108,25 +108,27 @@ function produceHiddenElements(){
 var bool = false
 
 function visibleElements(click){
-
-    click.id = "current"
-    click.style.backgroundColor = "lightblue"
-
-    // var span = click.getElementsByTagName("span")[0]
-    // span.style.visibility = "visible"
-
-    if(bool){
-        document.getElementById("previous").style.backgroundColor = "white"
-        document.getElementById("previous").id = ""
-        
+    var ff = document.getElementsByClassName("div3")
+    for(let i = 0; i < ff.length; i++){
+        ff[i].style.backgroundColor = "white"
     }
-    document.getElementById("current").id = "previous"
-    bool = true
 
+
+    var rowid = click.className
+    var rowArr = document.getElementsByClassName(rowid)
+    for(let i = 0; i < rowArr.length; i++){
+        click.parentNode.childNodes[i].style.backgroundColor = "grey"        
+
+        rowArr[i].style.backgroundColor = "grey"
+    }
+
+    click.style.backgroundColor = "lightblue"
+    
 }
 
 function handleClick(){
     visibleElements(this)
+
 }
 
 
@@ -147,8 +149,9 @@ function display(){
         for(let j = 0; j < result[i].length; j++){
     
             var div3 = document.createElement("div")
+            div3.className = "div3 "+j
             var span = document.createElement("span")
-            div3.className = "div3"
+            
             hiddenElementsArray.some((k) => k == j) ? div3.addEventListener("click",handleClick) + (span.ariaValueText = result[i][j]) + (span.innerText = ".") : span.innerText = result[i][j]
 
             div3.append(span)
@@ -168,7 +171,7 @@ function toFillBox(click){
     var arr = document.getElementsByTagName("div")
     
     for(let i = 0; i < arr.length; i++){
-        // console.log(arr[i])
+        // 
         if(arr[i].style.backgroundColor == "lightblue" || arr[i].style.backgroundColor == "red"){
             console.log(arr[i].getElementsByTagName("span")[0].ariaValueText == input)
             console.log(arr[i].getElementsByTagName("span")[0].ariaValueText)
@@ -185,7 +188,12 @@ function toFillBox(click){
             }
             arr[i].getElementsByTagName("span")[0].innerText = input
 
+            
+            // idarr.forEach((j) => j.style.backgroundColor = "black")
+
+
         }
+
     }
 
 }
