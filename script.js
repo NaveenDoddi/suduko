@@ -48,14 +48,14 @@ function main(){
             var result1Array = removeOneTimeRepeated(developedArray)
     
             var element = result1Array[Math.floor(Math.random() *  result1Array.length)]
-            result2Array.push(element)            
+            result2Array.push(element)
             
             for(let j = 0 ; j < rowArray.length; j++){
                 if(rowArray[j] == element){
                     rowArray.splice(j, 1)
                 }
             }
-            
+
             if(element == undefined){
                 break
             }
