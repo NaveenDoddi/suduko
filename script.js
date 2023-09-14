@@ -1,6 +1,6 @@
 console.log("jai sree krishnaa")
 
-
+console.log(document.getElementById("h11").ariaValueText)
 function main1(){
     var rowArray = [1,2,3,4,5,6,7,8,9]
 
@@ -149,9 +149,8 @@ function display(){
             var div3 = document.createElement("div")
             var span = document.createElement("span")
             div3.className = "div3"
-            hiddenElementsArray.map((k) => k == j ? div3.addEventListener("click",handleClick) + (span.style.visibility = "hidden"): 0)
+            hiddenElementsArray.some((k) => k == j) ? div3.addEventListener("click",handleClick) + (span.ariaValueText = result[i][j]) + (span.innerText = ".") : span.innerText = result[i][j]
 
-            span.innerText = result[i][j]
             div3.append(span)
             div2.append(div3)
 
@@ -167,15 +166,16 @@ display()
 function toFillBox(click){
     var input = click.innerText
     var arr = document.getElementsByTagName("div")
+    
     for(let i = 0; i < arr.length; i++){
+        // console.log(arr[i])
         if(arr[i].style.backgroundColor == "lightblue" || arr[i].style.backgroundColor == "red"){
-            console.log(arr[i].getElementsByTagName("span")[0].innerHTML.toString() == input)
-            console.log(arr[i].getElementsByTagName("span")[0].innerHTML.toString())
+            console.log(arr[i].getElementsByTagName("span")[0].ariaValueText == input)
+            console.log(arr[i].getElementsByTagName("span")[0].ariaValueText)
             console.log(input)
-            if(arr[i].getElementsByTagName("span")[0].innerHTML.toString() == input){
+            if(arr[i].getElementsByTagName("span")[0].ariaValueText == input){
 
                 arr[i].style.backgroundColor = "green"
-                arr[i].getElementsByTagName("span")[0].innerText = input
                 arr[i].getElementsByTagName("span")[0].style.visibility = "visible"
 
             }else{
@@ -183,6 +183,8 @@ function toFillBox(click){
                 arr[i].style.backgroundColor = "red"
                 
             }
+            arr[i].getElementsByTagName("span")[0].innerText = input
+
         }
     }
 

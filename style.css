@@ -1,9 +1,9 @@
 .div3{
-    display: inline-flex;
-    border:   2px solid black;
     
+    border:   2px solid black;
     height: 40px;
     width: 40px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
