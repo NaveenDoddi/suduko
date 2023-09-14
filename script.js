@@ -105,32 +105,6 @@ function produceHiddenElements(){
     return arr
 }
 
-var bool = false
-
-function visibleElements(click){
-    var ff = document.getElementsByClassName("div3")
-    for(let i = 0; i < ff.length; i++){
-        ff[i].style.backgroundColor = "white"
-    }
-
-
-    var rowid = click.className
-    var rowArr = document.getElementsByClassName(rowid)
-    for(let i = 0; i < rowArr.length; i++){
-        click.parentNode.childNodes[i].style.backgroundColor = "grey"        
-
-        rowArr[i].style.backgroundColor = "grey"
-    }
-
-    click.style.backgroundColor = "lightblue"
-    
-}
-
-function handleClick(){
-    visibleElements(this)
-
-}
-
 
 function display(){
 
@@ -152,11 +126,10 @@ function display(){
             div3.className = "div3 "+j
             var span = document.createElement("span")
             
-            hiddenElementsArray.some((k) => k == j) ? div3.addEventListener("click",handleClick) + (span.ariaValueText = result[i][j]) + (span.innerText = ".") : span.innerText = result[i][j]
+            hiddenElementsArray.some((k) => k == j) ? div3.addEventListener("click",handleClick) + (span.ariaValueText = result[i][j]) + (span.innerText = ".") : (span.innerText = result[i][j])
 
             div3.append(span)
             div2.append(div3)
-
         }
         div1.append(div2)
     }
@@ -164,48 +137,73 @@ function display(){
     document.getElementById("toShowTable").append(div1)
 }
 
-display()
 
-function toFillBox(click){
-    var input = click.innerText
-    var arr = document.getElementsByTagName("div")
-    
+function handleClick(){
+    visibleElements(this)
+
+}
+
+function visibleElements(click){
+
+    var arr = document.getElementsByClassName("div3")
     for(let i = 0; i < arr.length; i++){
-        // 
-        if(arr[i].style.backgroundColor == "lightblue" || arr[i].style.backgroundColor == "red"){
-            console.log(arr[i].getElementsByTagName("span")[0].ariaValueText == input)
-            console.log(arr[i].getElementsByTagName("span")[0].ariaValueText)
-            console.log(input)
-            if(arr[i].getElementsByTagName("span")[0].ariaValueText == input){
-
-                arr[i].style.backgroundColor = "green"
-                arr[i].getElementsByTagName("span")[0].style.visibility = "visible"
-
-            }else{
-
-                arr[i].style.backgroundColor = "red"
-                
-            }
-            arr[i].getElementsByTagName("span")[0].innerText = input
-
-            
-            // idarr.forEach((j) => j.style.backgroundColor = "black")
-
-
+        if(arr[i].style.backgroundColor != "red"){
+            arr[i].style.backgroundColor = "white"
         }
+        if(arr[i].ariaValueText == "isVisited"){
+            if(arr[i].getElementsByTagName("span")[0].ariaValueText == arr[i].getElementsByTagName("span")[0].innerText){
+                // arr[i].style.backgroundColor = "green"
+            }else if( arr[i].getElementsByTagName("span")[0].innerText != "."){
+                arr[i].style.backgroundColor = "red"
+            }
+        }   
+
+        if(arr[i].id == "current"){
+            arr[i].id = ""
+        }
+        
+    }
+
+    var rowId = click.className
+    var rowArr = document.getElementsByClassName(rowId)
+    for(let i = 0; i < rowArr.length; i++){
+
+        click.parentNode.childNodes[i].style.backgroundColor = "grey"
+        rowArr[i].style.backgroundColor = "grey"
 
     }
+
+    click.style.backgroundColor = "lightblue"
+    click.id = "current"
+    click.ariaValueText = "isVisited"
 
 }
 
 
-// var arr = [1,24,5,6]
-// const elementCount = [];
-// arr.forEach(i => {
-//     if (elementCount[i]) {
-//         elementCount[i]++;
-//     } else {
-//         elementCount[i] = 1;
-//     }
-// });
-// console.log(elementCount)
+function toFillBox(click){
+
+    var input = click.innerText
+    var div = document.getElementById("current")
+
+    if(div.getElementsByTagName("span")[0].ariaValueText == input && div.ariaValueText == "isVisited"){
+        div.style.backgroundColor = "green"
+    }else{
+        div.style.backgroundColor = "red"
+    }
+    div.getElementsByTagName("span")[0].innerText = input
+
+}
+function toSaveTable(){
+    localStorage.setItem("sudoko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
+
+}
+function toShowSavedTable(){
+    var i = localStorage.getItem("suduko")
+    console.log(i)
+    console.log(localStorage.getItem("typingHistory"))
+    // document.getElementById("toShowTable").append(JSON.parse(sessionStorage.getItem("suduko")))
+
+}
+
+
+display()
