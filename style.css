@@ -15,9 +15,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight:bolder;
 }
 
 #mainDiv{
     text-align: center;
     overflow: auto;
+    
+    font-family: cursive, sans-serif;
+}
+img{
+    height: 30px;
+    width: 30px;
+}
+#logo{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%; 
 }

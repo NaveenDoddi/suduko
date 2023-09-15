@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suduko.com</title>
@@ -11,21 +13,28 @@
 </head>
 <body>
     <div id="mainDiv">
-        <h1>Suduko</h1>
+
+        <h1>Sudoko <img id="logo" src="sudokoLogo.jpg" alt=""></h1>
+
         <div class="btn-group-vertical">
-            <div onclick="toShowSavedTable()" class='btn border border-light text-center bg-light'>Continue</div>
-            <div class='btn border border-light text-center bg-light'>
-                <select onchange="start()" class="form-select bg-info text-center" aria-label="Default select example">
-                    <option selected value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                </select>
+            <div onclick="toShowSavedTable()" class='btn border border-dark rounded-bottom text-center bg-light'>Continue</div>
+
+            <div class="dropdown">
+                <button class="btn btn-dark text-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Start New
+                </button>
+                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
+                    <li><button onclick="selectLevel(this)" class="btn">Easy</button></li>
+                    <li><button onclick="selectLevel(this)" class="btn">Medium</button></li>
+                    <li><button onclick="selectLevel(this)" class="btn">Hard</button></li>
+                </ul>
             </div>
+            
         </div>
 <br>
         <div class="d-inline-flex" style="width: 390px;">
-            <span class="mr-auto p-2 " id="timer">Timer</span> 
-            <span class=" btn ml-auto p-2" onclick="pause()">Pause</span>
+            <span class="mr-auto p-2 " id="timer">Timer: 00 : 00</span> 
+            <button type="button" class="btn bg-light ml-auto p-2" onclick="pause()">Pause <img src="icons8-pause-50.png" alt=""></button>
         </div>
 
         <div id="toShowTable">
@@ -45,12 +54,13 @@
         </div>
         <br>
         <div class="d-inline-flex" style="width: 390px;">
-            <span class=" btn mr-auto" onclick="toSaveTable()">Save</span>
-            <span class=" btn ml-auto" onclick="hint()">Hint</span>
+            <button type="button" class="btn bg-light mr-auto" onclick="toSaveTable()">Save <img src="icons8-save-50.png" alt=""></button>
+            <button type="button" class="btn bg-light ml-auto" onclick="hint()">Hint <img src="icons8-hint-50.png" alt=""></button>
         </div>
-        <div>
-            <button>Exit</button>
-            <button onclick="display()">Restart</button>
+        <br>
+        <div class="btn-group">
+            <button class="btn bg-dark text-light" type="button"><img src="exit.png" alt=""> Exit</button>
+            <button class="btn bg-light" type="button" onclick="display()">Restart <img src="icons8-restart-50.png" alt=""></button>
         </div>
 
     </div>
@@ -58,3 +68,4 @@
 </body>
 <script src="script.js"></script>
 </html>
+

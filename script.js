@@ -1,16 +1,36 @@
 console.log("jai sree krishnaa")
 
+let seconds = 0
+let minutes = 0
+let stopWatch
+let isStopWatchRunning = true
+
+let levelNumber = 4
 
 function start(){
     var div = document.getElementById("mainDiv");
     div.scrollTop += 47;
     
+}
+
+function selectLevel(btn){
+    var level = btn.innerText
+    if(level == "Easy"){
+        levelNumber = 4
+    }else if(level == "Medium"){
+        levelNumber = 5
+    }else{
+        levelNumber =  7
+    }
+
+    display()
+    seconds = 0
+    minutes = 0
+    document.getElementById("timer").innerText = "Timer: 00 : 00"
+    pause()
 
 }
-let seconds = 0
-let minutes = 0
-let stopWatch
-let isStopWatchRunning = true
+
 
 function timer(){
     seconds++
@@ -18,7 +38,7 @@ function timer(){
         minutes++
         seconds = 0
     }
-    document.getElementById("timer").innerText = "timer: " + minutes + " : " + seconds
+    document.getElementById("timer").innerText = "Timer: 0" + minutes + " : " + seconds
 }
 
 function startStopWatch(){
@@ -41,6 +61,18 @@ function hint(){
     console.log(document.getElementById("current"))
 }
 
+function toSaveTable(){
+    localStorage.setItem("suduko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
+
+}
+function toShowSavedTable(){
+    var i = JSON.parse(localStorage.getItem("suduko"))
+    var div = document.createElement("div")
+    div.innerHTML = i
+    document.getElementById("toShowTable").innerHTML = ""
+    document.getElementById("toShowTable").append(div)
+
+}
 
 
 function main1(){
@@ -130,7 +162,7 @@ function produceHiddenElements(){
 
     var arr = []
 
-    while(arr.length < 4){
+    while(arr.length < levelNumber){
 
         var element = Math.floor(Math.random() * 9)
         var bool = true
@@ -148,6 +180,7 @@ function produceHiddenElements(){
 function display(){
 
     const result = main()
+    document.getElementById("toShowTable").innerHTML = ""
 
     var div1 = document.createElement("div")
     div1.className = "div1"
@@ -191,6 +224,8 @@ function visibleElements(click){
         if(arr[i].ariaValueText == "isVisited"){
             if(arr[i].getElementsByTagName("span")[0].ariaValueText == arr[i].getElementsByTagName("span")[0].innerText){
                 // arr[i].style.backgroundColor = "green"
+                // arr[i].getElementsByTagName("span")[0].style.fontSize ="larger"
+                arr[i].getElementsByTagName("span")[0].style.fontWeight ="bolder"
             }else if( arr[i].getElementsByTagName("span")[0].innerText != "."){
                 arr[i].style.backgroundColor = "red"
             }
@@ -206,8 +241,8 @@ function visibleElements(click){
     var rowArr = document.getElementsByClassName(rowId)
     for(let i = 0; i < rowArr.length; i++){
 
-        click.parentNode.childNodes[i].style.backgroundColor = "grey"
-        rowArr[i].style.backgroundColor = "grey"
+        click.parentNode.childNodes[i].style.backgroundColor = "lightgrey"
+        rowArr[i].style.backgroundColor = "lightgrey"
 
     }
 
@@ -215,10 +250,6 @@ function visibleElements(click){
     click.id = "current"
     click.ariaValueText = "isVisited"
 
-}
-
-function empty(){
-    console.log("empty")
 }
 
 function toFillBox(click){
@@ -235,16 +266,6 @@ function toFillBox(click){
     div.getElementsByTagName("span")[0].innerText = input
 
 }
-function toSaveTable(){
-    localStorage.setItem("suduko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
 
-}
-function toShowSavedTable(){
-    var i = JSON.parse(localStorage.getItem("suduko"))
-    var div = document.createElement("div")
-    div.innerHTML = i
-    // document.getElementById("toShowTable").append(div)
-
-}
 
 display()
