@@ -63,14 +63,31 @@ function hint(){
 
 function toSaveTable(){
     localStorage.setItem("suduko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
-
+    localStorage.setItem("sudokoTime",JSON.stringify(minutes + "." + seconds))
 }
 function toShowSavedTable(){
-    var i = JSON.parse(localStorage.getItem("suduko"))
+
+    var table = JSON.parse(localStorage.getItem("suduko"))
     var div = document.createElement("div")
-    div.innerHTML = i
+    div.innerHTML = table
     document.getElementById("toShowTable").innerHTML = ""
     document.getElementById("toShowTable").append(div)
+
+    var divs = document.getElementsByClassName("div3")
+    for(let i = 0; i < divs.length; i++){
+        var span = divs[i].getElementsByTagName("span")[0]
+        if(span.ariaValueText){
+            divs[i].addEventListener("click",handleClick)
+        }
+    }
+
+    var time = JSON.parse(localStorage.getItem("sudokoTime"))
+
+    minutes = time.split(".")[0]
+    seconds = time.split(".")[1]
+    document.getElementById("timer").innerText = "Timer: 0" + minutes + " : " + seconds
+
+    console.log(time)
 
 }
 
