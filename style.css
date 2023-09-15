@@ -16,3 +16,8 @@
     align-items: center;
     justify-content: center;
 }
+
+#mainDiv{
+    text-align: center;
+    overflow: auto;
+}

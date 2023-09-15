@@ -1,6 +1,48 @@
 console.log("jai sree krishnaa")
 
-console.log(document.getElementById("h11").ariaValueText)
+
+function start(){
+    var div = document.getElementById("mainDiv");
+    div.scrollTop += 47;
+    
+
+}
+let seconds = 0
+let minutes = 0
+let stopWatch
+let isStopWatchRunning = true
+
+function timer(){
+    seconds++
+    if(seconds == 60){
+        minutes++
+        seconds = 0
+    }
+    document.getElementById("timer").innerText = "timer: " + minutes + " : " + seconds
+}
+
+function startStopWatch(){
+    if(isStopWatchRunning){
+        stopWatch = setInterval(() => {
+            timer()
+        }, 1000);
+        
+    }
+    isStopWatchRunning = false
+}
+
+function pause(){
+    clearInterval(stopWatch)
+    isStopWatchRunning = true
+}
+
+function hint(){
+    document.getElementById("current").getElementsByTagName("span")[0].innerText = document.getElementById("current").getElementsByTagName("span")[0].ariaValueText
+    console.log(document.getElementById("current"))
+}
+
+
+
 function main1(){
     var rowArray = [1,2,3,4,5,6,7,8,9]
 
@@ -69,23 +111,20 @@ function main(){
     return resultArray
 }
 
-
 function removeOneTimeRepeated(arr) {
+
     const elementCount = [];
   
-    arr.forEach(i => {
-        if (elementCount[i]) {
-            elementCount[i]++;
-        } else {
-            elementCount[i] = 1;
+    arr.forEach(i => { 
+        if (elementCount[i]){
+            elementCount[i]++
+        } else{
+            elementCount[i] = 1
         }
     })
-
     const result = arr.filter(i => elementCount[i] != 1);
-
-    return result;
+    return result
 }
-
 
 function produceHiddenElements(){
 
@@ -137,10 +176,9 @@ function display(){
     document.getElementById("toShowTable").append(div1)
 }
 
-
 function handleClick(){
     visibleElements(this)
-
+    startStopWatch()
 }
 
 function visibleElements(click){
@@ -179,6 +217,9 @@ function visibleElements(click){
 
 }
 
+function empty(){
+    console.log("empty")
+}
 
 function toFillBox(click){
 
@@ -187,6 +228,7 @@ function toFillBox(click){
 
     if(div.getElementsByTagName("span")[0].ariaValueText == input && div.ariaValueText == "isVisited"){
         div.style.backgroundColor = "green"
+        div.removeEventListener("click",handleClick)
     }else{
         div.style.backgroundColor = "red"
     }
@@ -194,16 +236,15 @@ function toFillBox(click){
 
 }
 function toSaveTable(){
-    localStorage.setItem("sudoko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
+    localStorage.setItem("suduko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
 
 }
 function toShowSavedTable(){
-    var i = localStorage.getItem("suduko")
-    console.log(i)
-    console.log(localStorage.getItem("typingHistory"))
-    // document.getElementById("toShowTable").append(JSON.parse(sessionStorage.getItem("suduko")))
+    var i = JSON.parse(localStorage.getItem("suduko"))
+    var div = document.createElement("div")
+    div.innerHTML = i
+    // document.getElementById("toShowTable").append(div)
 
 }
-
 
 display()

@@ -10,24 +10,51 @@
     
 </head>
 <body>
-    <h1 aria-valuetext="h1" id="h11" class="h1"></h1>
-    <h1>Suduko</h1>
-    
-    <div id="toShowTable"></div>
-    <p></p>
-    <div id="page" class="btn-group">
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>1</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>2</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>3</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>4</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>5</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>6</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>7</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>8</div>
-        <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>9</div>
+    <div id="mainDiv">
+        <h1>Suduko</h1>
+        <div class="btn-group-vertical">
+            <div onclick="toShowSavedTable()" class='btn border border-light text-center bg-light'>Continue</div>
+            <div class='btn border border-light text-center bg-light'>
+                <select onchange="start()" class="form-select bg-info text-center" aria-label="Default select example">
+                    <option selected value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+        </div>
+<br>
+        <div class="d-inline-flex" style="width: 390px;">
+            <span class="mr-auto p-2 " id="timer">Timer</span> 
+            <span class=" btn ml-auto p-2" onclick="pause()">Pause</span>
+        </div>
+
+        <div id="toShowTable">
+        </div>
+        <p></p>
+       
+        <div id="page" class="btn-group">
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>1</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>2</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>3</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>4</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>5</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>6</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>7</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>8</div>
+            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>9</div>
+        </div>
+        <br>
+        <div class="d-inline-flex" style="width: 390px;">
+            <span class=" btn mr-auto" onclick="toSaveTable()">Save</span>
+            <span class=" btn ml-auto" onclick="hint()">Hint</span>
+        </div>
+        <div>
+            <button>Exit</button>
+            <button onclick="display()">Restart</button>
+        </div>
+
     </div>
-    <button onclick="toSaveTable()">save</button>
-    <button onclick="toShowSavedTable()">continue</button>
+    
 </body>
 <script src="script.js"></script>
 </html>
