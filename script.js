@@ -58,7 +58,7 @@ function pause(){
 
 function hint(){
     document.getElementById("current").getElementsByTagName("span")[0].innerText = document.getElementById("current").getElementsByTagName("span")[0].ariaValueText
-    console.log(document.getElementById("current"))
+    document.getElementById("hintSound").play()
 }
 
 function toSaveTable(){
@@ -225,9 +225,13 @@ function visibleElements(click){
             if(arr[i].getElementsByTagName("span")[0].ariaValueText == arr[i].getElementsByTagName("span")[0].innerText){
                 // arr[i].style.backgroundColor = "green"
                 // arr[i].getElementsByTagName("span")[0].style.fontSize ="larger"
+
                 arr[i].getElementsByTagName("span")[0].style.fontWeight ="bolder"
+
             }else if( arr[i].getElementsByTagName("span")[0].innerText != "."){
+
                 arr[i].style.backgroundColor = "red"
+                
             }
         }   
 
@@ -259,9 +263,12 @@ function toFillBox(click){
 
     if(div.getElementsByTagName("span")[0].ariaValueText == input && div.ariaValueText == "isVisited"){
         div.style.backgroundColor = "green"
+        document.getElementById("correctSound").play()
+
         div.removeEventListener("click",handleClick)
     }else{
         div.style.backgroundColor = "red"
+        document.getElementById("wrongSound").play()
     }
     div.getElementsByTagName("span")[0].innerText = input
 
