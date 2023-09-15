@@ -86,9 +86,6 @@ function toShowSavedTable(){
     minutes = time.split(".")[0]
     seconds = time.split(".")[1]
     document.getElementById("timer").innerText = "Timer: 0" + minutes + " : " + seconds
-
-    console.log(time)
-
 }
 
 
@@ -289,6 +286,32 @@ function toFillBox(click){
     }
     div.getElementsByTagName("span")[0].innerText = input
 
+    checkComplete()
+
+}
+
+function checkComplete(){
+    var count = 0
+    var divs = document.getElementsByClassName("div3")
+    for(let i = 0; i < divs.length; i++){
+        if(divs[i].ariaValueText == "isVisited"){
+            count++
+        }
+    }
+    if(levelNumber == 4){
+        if(count == 36){
+            console.log("completed")
+        }
+    }else if(levelNumber == 5){
+        if(count == 45){
+            console.log("completed")
+        }
+    }else{
+        if(count == 63){
+            console.log("completed")
+        }
+    }
+    
 }
 
 
