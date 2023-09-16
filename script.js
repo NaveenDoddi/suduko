@@ -399,6 +399,7 @@ function toFillBox(click){
     }else{
         div.style.backgroundColor = "red"
         document.getElementById("wrongSound").play()
+        document.getElementById("wrongSound").currentTime = 0;
     }
     div.getElementsByTagName("span")[0].innerText = input
 
