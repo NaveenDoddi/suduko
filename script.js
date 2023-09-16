@@ -7,6 +7,13 @@ let isStopWatchRunning = true
 
 let levelNumber = 4
 
+var time = JSON.parse(localStorage.getItem("sudokoTime"))
+if(time == null){
+    document.getElementById("continueBtn").style.visibility = "hidden"
+}else{
+    displayContinueBtn()
+}
+
 function start(){
     var div = document.getElementById("mainDiv");
     div.scrollTop += 47;
@@ -15,6 +22,7 @@ function start(){
 
 function selectLevel(btn){
     var level = btn.innerText
+
     if(level == "Easy"){
         levelNumber = 4
     }else if(level == "Medium"){
@@ -27,7 +35,13 @@ function selectLevel(btn){
     seconds = 0
     minutes = 0
     document.getElementById("timer").innerText = "Timer: 00 : 00"
-    pause()
+    // pause()
+
+    document.getElementById("continueStartBtns").style.visibility = "hidden"
+    document.getElementById("continueStartBtns").style.position = "absolute"
+    document.getElementById("sudokoBody").style.visibility = "visible"
+
+    document.getElementById("continueBtn").style.visibility = "hidden"
 
 }
 
@@ -54,22 +68,96 @@ function startStopWatch(){
 function pause(){
     clearInterval(stopWatch)
     isStopWatchRunning = true
+
+    const div1 = document.getElementById('sudokoBody');
+    const div2 = document.getElementById('pauseDiv');
+
+    div1.style.visibility = "hidden"
+    div2.style.visibility = "visible"
+
+    const div3 = div2.getElementsByTagName("div")[0]
+
+    var difficultySpan = div3.getElementsByTagName("span")[1]
+
+    if(levelNumber == 4){
+        var difficulty = "Easy"
+        difficultySpan.style.backgroundColor = "green"
+    }else if(levelNumber == 5){
+        var difficulty = "Medium"
+        difficultySpan.style.backgroundColor = "orange"
+    }else{
+        var difficulty = "Hard"
+        difficultySpan.style.backgroundColor = "red"
+    }
+
+    
+    difficultySpan.innerText = "Difficulty: "+ difficulty
+    
+    var timeSpan = div3.getElementsByTagName("span")[0]
+    timeSpan.innerText =  "Time: " + minutes + " : " + seconds
+
+}
+
+function resume(){
+
+    startStopWatch()
+    const div1 = document.getElementById('sudokoBody');
+    const div2 = document.getElementById('pauseDiv');
+
+    document.getElementById("exitDiv").style.visibility = "hidden"
+
+    div2.style.visibility = "hidden"
+    div1.style.visibility = "visible"
+}
+
+function restart(){
+    resume()
+    display()
+    clearInterval(stopWatch)
+    document.getElementById("timer").innerText = "Timer: 00 : 00"
+
 }
 
 function hint(){
     document.getElementById("current").getElementsByTagName("span")[0].innerText = document.getElementById("current").getElementsByTagName("span")[0].ariaValueText
     document.getElementById("hintSound").play()
+    document.getElementById("current").style.backgroundColor = "green"
 }
 
 function toSaveTable(){
     localStorage.setItem("suduko",JSON.stringify(document.getElementById("toShowTable").innerHTML))
     localStorage.setItem("sudokoTime",JSON.stringify(minutes + "." + seconds))
+
+    document.getElementById("exitDiv").style.visibility = "hidden"
+    document.getElementById("continueStartBtns").style.visibility = "visible"
+    document.getElementById("continueStartBtns").style.position = "relative"
+    document.getElementById("sudokoBody").style.visibility = "hidden"
+
+    displayContinueBtn()
+
 }
-function toShowSavedTable(){
+
+function withOutSave(){
+    document.getElementById("exitDiv").style.visibility = "hidden"
+    document.getElementById("continueStartBtns").style.visibility = "visible"
+    document.getElementById("continueStartBtns").style.position = "relative"
+    document.getElementById("sudokoBody").style.visibility = "hidden"
+
+    displayContinueBtn()
+}
+function Continue(){
+
+    document.getElementById("continueBtn").style.visibility = "hidden"
+
+    document.getElementById("continueStartBtns").style.visibility = "hidden"
+    document.getElementById("continueStartBtns").style.position = "absolute"
+
+    document.getElementById("sudokoBody").style.visibility = "visible"
 
     var table = JSON.parse(localStorage.getItem("suduko"))
     var div = document.createElement("div")
     div.innerHTML = table
+
     document.getElementById("toShowTable").innerHTML = ""
     document.getElementById("toShowTable").append(div)
 
@@ -85,7 +173,34 @@ function toShowSavedTable(){
 
     minutes = time.split(".")[0]
     seconds = time.split(".")[1]
-    document.getElementById("timer").innerText = "Timer: 0" + minutes + " : " + seconds
+    document.getElementById("timer").innerText = "Timer: " + minutes + " : " + seconds
+
+    startStopWatch()    
+}
+
+function exit1(){
+    document.getElementById("exitDiv").style.visibility = "visible"
+    document.getElementById("sudokoBody").style.visibility = "hidden"
+}
+
+function displayContinueBtn(){
+    var btn = document.getElementById("continueBtn")
+    btn.innerText = "Continue"
+
+    if(levelNumber == 4){
+        var difficulty = "Easy"
+    }else if(levelNumber == 5){
+        var difficulty = "Medium"
+    }else{
+        var difficulty = "Hard"
+    }
+    btn.style.visibility = "visible"
+    var br = document.createElement("br")
+
+    var span = document.createElement("span")
+    span.style.fontSize = "small"
+    span.innerText = difficulty + " " + minutes + " : " + seconds
+    btn.append(br , span)
 }
 
 
@@ -221,6 +336,7 @@ function display(){
     }
 
     document.getElementById("toShowTable").append(div1)
+
 }
 
 function handleClick(){
@@ -301,12 +417,15 @@ function checkComplete(){
     if(levelNumber == 4){
         if(count == 36){
             console.log("completed")
+            document.getElementById("winSound").play()
         }
-    }else if(levelNumber == 5){
+    }
+    if(levelNumber == 5){
         if(count == 45){
             console.log("completed")
         }
-    }else{
+    }
+    if(levelNumber == 7){
         if(count == 63){
             console.log("completed")
         }

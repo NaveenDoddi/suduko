@@ -16,8 +16,8 @@
 
         <h1>Sudoko <img id="logo" src="sudokoLogo.jpg" alt=""></h1>
 
-        <div class="btn-group-vertical">
-            <div onclick="toShowSavedTable()" class='btn border border-dark rounded-bottom text-center bg-light'>Continue</div>
+        <div class="btn-group-vertical" id="continueStartBtns">
+            <div onclick="Continue()" id="continueBtn" class='btn border border-dark rounded-bottom text-center bg-light'>Continue</div>
 
             <div class="dropdown">
                 <button class="btn btn-dark text-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,42 +31,83 @@
             </div>
             
         </div>
+        
 <br>
-        <div class="d-inline-flex" style="width: 390px;">
-            <span class="mr-auto p-2 " id="timer">Timer: 00 : 00</span> 
-            <button type="button" class="btn bg-light ml-auto p-2" onclick="pause()">Pause <img src="icons8-pause-50.png" alt=""></button>
+        <div class="d-flex justify-content-center align-items-center" style="height: 600px;">
+            <div id="sudokoBody" class="d-flex flex-column position-absolute">
+                <div class="d-inline-flex" style="width: 390px;">
+                    <span class="mr-auto p-2 " id="timer">Timer: 00 : 00</span> 
+                    <button type="button" class="btn bg-light ml-auto p-2" onclick="pause()">Pause <img src="icons8-pause-50.png" alt=""></button>
+                </div>
+        
+                <div id="toShowTable"></div>
+                <p></p>
+               
+                <div id="page" class="btn-group">
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>1</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>2</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>3</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>4</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>5</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>6</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>7</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>8</div>
+                    <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>9</div>
+                </div>
+    <br>
+                <div class="d-inline-flex" style="width: 390px;">
+                    <button type="button" class="btn bg-primary mr-auto" onclick="toSaveTable()">Save <img src="icons8-save-50.png" alt=""></button>
+                    <button type="button" class="btn bg-warning ml-auto" onclick="hint()">Hint <img src="icons8-hint-50.png" alt=""></button>
+                </div>
+    <br>
+                <div class="btn-group justify-content-center align-items-center"> 
+                    <button class="btn bg-dark text-light" type="button" onclick="exit1()"><img src="exit.png" alt="">Exit</button>
+                    <button class="btn bg-light" type="button" onclick="restart()">Restart <img src="icons8-restart-50.png" alt=""></button>
+                </div>
+        
+            </div>
+    <br>
+            <div class="position-absolute">
+                <div id="pauseDiv" style="width: 250px;">
+                    <div class="d-flex">
+                        <span class="mr-auto">time</span>
+                        <span class="ml-auto">difficulty</span>
+                    </div>
+                    <p></p>
+                    <p>playing SUDOKO improves your knowledge</p>
+                    <p></p>
+                    <div class="d-flex">
+                        <button type="button" class="btn bg-info bg-info mr-auto" onclick="resume()"><img src="play.png" alt=""> Resume</button>
+                        <button type="button" class="btn bg-light ml-auto" onclick="restart()">Restart <img src="icons8-restart-50.png" alt=""></button>
+                    </div>
+                </div>
+        
+                <div id="exitDiv" style="width: 250px;">
+                    <p></p>
+                    <div>
+                        <button type="button" class="btn bg-info" onclick="resume()">Resume <img src="play.png" alt=""></button>
+                        <p></p>
+                    </div>
+                    <div class="d-flex btn-group">
+                        <button type="button" class="btn bg-success" onclick="toSaveTable()"><img src="icons8-save-50.png" alt=""> Save</button>
+                        <button type="button" class="btn bg-dark text-light" onclick="withOutSave()">without save <img src="icons8-restart-50.png" alt=""></button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div id="toShowTable">
-        </div>
-        <p></p>
-       
-        <div id="page" class="btn-group">
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>1</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>2</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>3</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>4</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>5</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>6</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>7</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>8</div>
-            <div id="inputNumbers" onclick="toFillBox(this)" class='btn border border-light text-center float-left bg-light'>9</div>
-        </div>
-        <br>
-        <div class="d-inline-flex" style="width: 390px;">
-            <button type="button" class="btn bg-light mr-auto" onclick="toSaveTable()">Save <img src="icons8-save-50.png" alt=""></button>
-            <button type="button" class="btn bg-light ml-auto" onclick="hint()">Hint <img src="icons8-hint-50.png" alt=""></button>
-        </div>
-        <br>
-        <div class="btn-group">
-            <button class="btn bg-dark text-light" type="button"><img src="exit.png" alt=""> Exit</button>
-            <button class="btn bg-light" type="button" onclick="display()">Restart <img src="icons8-restart-50.png" alt=""></button>
-        </div>
 
+
+        
     </div>
+
+
+    
     <audio src="correct.mp3" id="correctSound"></audio>
     <audio src="wrong.mp3" id="wrongSound"></audio>
     <audio src="hint.mp3" id="hintSound"></audio>
+    <audio src="win.mp3" id="winSound"></audio>
     
 </body>
 <script src="script.js"></script>

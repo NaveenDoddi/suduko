@@ -15,14 +15,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight:bolder;
+    font-weight: bolder;
 }
 
 #mainDiv{
     text-align: center;
     overflow: auto;
+    position: relative;
     
     font-family: cursive, sans-serif;
+
+    /* height: 600px; */
 }
 img{
     height: 30px;
@@ -32,4 +35,24 @@ img{
     height: 50px;
     width: 50px;
     border-radius: 100%; 
+}
+#continueStartBtns{
+    position: relative;
+    top: 10%;
+
+}
+
+#sudokoBody{
+    visibility: hidden;
+    z-index: 2  ;
+    
+}
+#pauseDiv, #exitDiv{
+    z-index: 1;
+    visibility: hidden;
+
+    /* position: absolute; */
+    /* top: 40%;
+    left: 25%; */
+    /* bottom: 0; */
 }
