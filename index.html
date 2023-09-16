@@ -68,6 +68,12 @@
             </div>
     <br>
             <div class="position-absolute">
+                <div id="winDiv">
+                    <h2>Congratulations</h2>
+                    <h4>task completed</h4>
+                    <button type="button" class="btn bg-light ml-auto" onclick="restart()">Start New <img src="icons8-restart-50.png" alt=""></button>
+                    
+                </div>
                 <div id="pauseDiv" style="width: 250px;">
                     <div class="d-flex">
                         <span class="mr-auto">time</span>
@@ -96,14 +102,10 @@
             </div>
 
         </div>
-
-
-
         
     </div>
 
 
-    
     <audio src="correct.mp3" id="correctSound"></audio>
     <audio src="wrong.mp3" id="wrongSound"></audio>
     <audio src="hint.mp3" id="hintSound"></audio>

@@ -10,7 +10,7 @@
 
 #inputNumbers{
     height: 30px;
-    width: 41px;
+    width: 44px;
     
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@ img{
     z-index: 2  ;
     
 }
-#pauseDiv, #exitDiv{
+#pauseDiv, #exitDiv , #winDiv{
     z-index: 1;
     visibility: hidden;
 

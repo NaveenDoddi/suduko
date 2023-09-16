@@ -11,7 +11,9 @@ var time = JSON.parse(localStorage.getItem("sudokoTime"))
 if(time == null){
     document.getElementById("continueBtn").style.visibility = "hidden"
 }else{
+
     displayContinueBtn()
+
 }
 
 function start(){
@@ -43,6 +45,10 @@ function selectLevel(btn){
 
     document.getElementById("continueBtn").style.visibility = "hidden"
 
+    clearInterval(stopWatch)
+
+    isStopWatchRunning = true
+    startStopWatch()
 }
 
 
@@ -120,8 +126,13 @@ function restart(){
 
     isStopWatchRunning = true
     startStopWatch()
-    
 
+    document.getElementById('sudokoBody').style.visibility = "visible"
+    document.getElementById("exitDiv").style.visibility = "hidden"
+    document.getElementById('pauseDiv').style.visibility = 'hidden'
+    document.getElementById('winDiv').style.visibility = 'hidden'
+
+    
 }
 
 function hint(){
@@ -140,6 +151,8 @@ function toSaveTable(){
     document.getElementById("sudokoBody").style.visibility = "hidden"
 
     displayContinueBtn()
+    clearInterval(stopWatch)
+    isStopWatchRunning = true
 
 }
 
@@ -206,6 +219,13 @@ function displayContinueBtn(){
 
     var span = document.createElement("span")
     span.style.fontSize = "small"
+    span.style.color = "grey"
+
+    var time = JSON.parse(localStorage.getItem("sudokoTime"))
+
+    minutes = time.split(".")[0]
+    seconds = time.split(".")[1]
+
     span.innerText = difficulty + " " + minutes + " : " + seconds
     btn.append(br , span)
 }
@@ -424,19 +444,25 @@ function checkComplete(){
     }
     if(levelNumber == 4){
         if(count == 36){
-            console.log("completed")
-            document.getElementById("winSound").play()
+            run()
         }
     }
     if(levelNumber == 5){
         if(count == 45){
-            console.log("completed")
+            run()
         }
     }
     if(levelNumber == 7){
         if(count == 63){
-            console.log("completed")
+            run()
         }
+    }
+    function run(){
+        console.log("completed")
+        document.getElementById("winSound").play()
+        document.getElementById("sudokoBody").style.visibility = "hidden"
+        document.getElementById("winDiv").style.visibility = "visible"
+        clearInterval(stopWatch)
     }
     
 }
