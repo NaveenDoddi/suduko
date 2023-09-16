@@ -52,7 +52,7 @@ function timer(){
         minutes++
         seconds = 0
     }
-    document.getElementById("timer").innerText = "Timer: 0" + minutes + " : " + seconds
+    document.getElementById("timer").innerText = "Timer: " + minutes + " : " + seconds
 }
 
 function startStopWatch(){
@@ -99,7 +99,7 @@ function pause(){
 }
 
 function resume(){
-
+    isStopWatchRunning = true
     startStopWatch()
     const div1 = document.getElementById('sudokoBody');
     const div2 = document.getElementById('pauseDiv');
@@ -111,10 +111,16 @@ function resume(){
 }
 
 function restart(){
-    resume()
+    // resume()
     display()
     clearInterval(stopWatch)
     document.getElementById("timer").innerText = "Timer: 00 : 00"
+    seconds = 0
+    minutes = 0
+
+    isStopWatchRunning = true
+    startStopWatch()
+    
 
 }
 
@@ -175,6 +181,7 @@ function Continue(){
     seconds = time.split(".")[1]
     document.getElementById("timer").innerText = "Timer: " + minutes + " : " + seconds
 
+    isStopWatchRunning = true
     startStopWatch()    
 }
 
