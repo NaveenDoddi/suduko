@@ -138,7 +138,10 @@ function restart(){
 function hint(){
     document.getElementById("current").getElementsByTagName("span")[0].innerText = document.getElementById("current").getElementsByTagName("span")[0].ariaValueText
     document.getElementById("hintSound").play()
+    document.getElementById("hintSound").currentTime = 0;
     document.getElementById("current").style.backgroundColor = "green"
+
+    checkComplete()
 }
 
 function toSaveTable(){
@@ -381,9 +384,9 @@ function visibleElements(click){
         if(arr[i].ariaValueText == "isVisited"){
             if(arr[i].getElementsByTagName("span")[0].ariaValueText == arr[i].getElementsByTagName("span")[0].innerText){
                 // arr[i].style.backgroundColor = "green"
-                // arr[i].getElementsByTagName("span")[0].style.fontSize ="larger"
+                // arr[i].getElementsByTagName("span")[0].style.fontSize ="large"
 
-                arr[i].getElementsByTagName("span")[0].style.fontWeight ="bolder"
+                arr[i].getElementsByTagName("span")[0].style.fontFamily = "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
 
             }else if( arr[i].getElementsByTagName("span")[0].innerText != "."){
 
@@ -421,6 +424,8 @@ function toFillBox(click){
     if(div.getElementsByTagName("span")[0].ariaValueText == input && div.ariaValueText == "isVisited"){
         div.style.backgroundColor = "green"
         document.getElementById("correctSound").play()
+        document.getElementById("correctSound").currentTime = 0;
+
 
         div.removeEventListener("click",handleClick)
     }else{
