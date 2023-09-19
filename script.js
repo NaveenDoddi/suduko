@@ -386,7 +386,7 @@ function visibleElements(click){
                 // arr[i].style.backgroundColor = "green"
                 // arr[i].getElementsByTagName("span")[0].style.fontSize ="large"
 
-                arr[i].getElementsByTagName("span")[0].style.fontFamily = "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+                // arr[i].getElementsByTagName("span")[0].style.fontFamily = "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
 
             }else if( arr[i].getElementsByTagName("span")[0].innerText != "."){
 
