@@ -46,6 +46,7 @@ function selectLevel(btn){
     document.getElementById("continueBtn").style.visibility = "hidden"
 
     clearInterval(stopWatch)
+    
 
     isStopWatchRunning = true
     startStopWatch()
@@ -132,7 +133,6 @@ function restart(){
     document.getElementById('pauseDiv').style.visibility = 'hidden'
     document.getElementById('winDiv').style.visibility = 'hidden'
 
-    
 }
 
 function hint(){
@@ -273,7 +273,6 @@ function main(){
                         colArray.splice(l, 1)
                     }
                 }
-                
             }
     
             var developedArray = [...colArray, ...rowArray]
