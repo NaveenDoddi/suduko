@@ -50,6 +50,7 @@ function selectLevel(btn){
 
     isStopWatchRunning = true
     startStopWatch()
+    
 }
 
 
